@@ -2,13 +2,17 @@ import React from 'react'
 import styled from 'styled-components'
 import { Provider } from 'react-redux'
 import store from './modules'
+import { AppNavigator } from './navigators'
 
-const Block = styled.Text``
+const Container = styled.View`
+  flex: 1;
+  background: #1f242b;
+`
 
 const App = () => (
-  <>
-    <Block>Hello</Block>
-  </>
+  <Container>
+    <AppNavigator />
+  </Container>
 )
 
 const Root = () => (

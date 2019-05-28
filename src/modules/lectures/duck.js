@@ -4,22 +4,39 @@ import { combineReducers } from 'redux'
 
 const prefix = 'LECTURES'
 
-export const fetchLectures = createAction(`${prefix}/FETCH_LECTURES`)
+const getLectures = R.pipe(R.prop('lectures'))
 
-const byIds = handleActions(
+export const fetchLecturesRequest = createAction(
+  `${prefix}/FETCH_LECTURES_REQUEST`,
+)
+export const fetchLecturesSuccess = createAction(
+  `${prefix}/FETCH_LECTURES_SUCCESS`,
+)
+
+const lectureByIds = handleActions(
   {
-    [fetchLectures]: (_, { payload }) => payload,
+    [fetchLecturesSuccess]: (_, { payload }) => payload,
   },
   {},
 )
 
-const allIds = handleActions(
+const lectureAllIds = handleActions(
   {
-    [fetchLectures]: (_, { payload }) => payload,
+    [fetchLecturesSuccess]: (_, { payload }) => payload,
   },
   [],
 )
 
-const lectures = combineReducers({ byIds, allIds })
+export const getLectureByIds = R.pipe(
+  getLectures,
+  R.prop('getLectureByIds'),
+)
+
+export const getLectureList = R.pipe(
+  getLectureByIds,
+  R.values,
+)
+
+const lectures = combineReducers({ lectureByIds, lectureAllIds })
 
 export default lectures
