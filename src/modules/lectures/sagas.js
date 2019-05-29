@@ -1,14 +1,18 @@
-import { takeLatest } from 'redux-saga/effects'
-import { call } from 'redux-saga'
+import * as R from 'ramda'
+import { call, put, delay, takeLatest } from 'redux-saga/effects'
 import * as LecturesManager from './LecturesManager'
 import { fetchLecturesRequest } from './duck'
+import { navigate } from '../navigation'
+import { NAVIGATORS } from '../../constants'
 
 const fetchLecturesSaga = function*() {
   const lectures = yield call(LecturesManager.getLectures)
 
   yield delay(1000)
 
-  console.log(lectures, 'lectures')
+  if (!R.isEmpty(lectures)) {
+    yield put(navigate(NAVIGATORS.LECTURES))
+  }
 }
 
 const lecturesSaga = function*() {

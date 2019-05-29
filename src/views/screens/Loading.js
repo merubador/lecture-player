@@ -24,7 +24,7 @@ const Loading = R.compose(
     { fetchLecturesRequest },
   ),
   lifecycle({
-    componentDidUpdate() {
+    componentDidMount() {
       const { fetchLecturesRequest } = this.props
 
       fetchLecturesRequest()

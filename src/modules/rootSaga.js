@@ -1,8 +1,7 @@
 import { all } from 'redux-saga/effects'
-//TODO: navigation
-// import { navigationSaga } from './navigation'
+import { navigationSaga } from './navigation'
 import { handleErrors } from '../aspects'
-import { lectureSaga } from './lectures'
+import { lecturesSaga } from './lectures'
 
 const handleErrorsWithOptions = saga =>
   handleErrors({
@@ -14,7 +13,10 @@ const handleErrorsWithOptions = saga =>
   })(saga)()
 
 const rootSaga = function*() {
-  yield all([handleErrorsWithOptions(lectureSaga)])
+  yield all([
+    handleErrorsWithOptions(navigationSaga),
+    handleErrorsWithOptions(lecturesSaga),
+  ])
 }
 
 export default rootSaga
