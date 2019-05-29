@@ -8,10 +8,15 @@ import LectureItem from './LectureItem'
 const Container = styled.View`
   flex: 1;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  background: #1f242b;
 `
 
-const Title = styled.Text``
+const Title = styled.Text`
+  margin-bottom: 25px;
+  font-size: 32px;
+  color: #f7f7f7;
+`
 
 const LecturesDumb = ({ lectures }) =>
   console.log(lectures, 'lectures') || (
