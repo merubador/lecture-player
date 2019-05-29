@@ -18,15 +18,14 @@ const Title = styled.Text`
   color: #f7f7f7;
 `
 
-const LecturesDumb = ({ lectures }) =>
-  console.log(lectures, 'lectures') || (
-    <Container>
-      <Title>Лекции</Title>
-      {lectures.map((lecture, index) => (
-        <LectureItem key={index} lecture={lecture} />
-      ))}
-    </Container>
-  )
+const LecturesDumb = ({ lectures }) => (
+  <Container>
+    <Title>Лекции</Title>
+    {lectures.map((lecture, index) => (
+      <LectureItem key={index} lecture={lecture} />
+    ))}
+  </Container>
+)
 
 const Lectures = R.compose(
   connect(

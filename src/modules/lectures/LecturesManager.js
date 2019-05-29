@@ -6,12 +6,12 @@ const lectureMock = [
   {
     id: 1,
     name: 'lecture 1',
-    uri: 'uriuriuriuriuriuriuriuri',
+    uri: '/Users/yaroslav/github/lecture-player/src/assets/track.mp3',
   },
   {
     id: 2,
     name: 'lecture 2',
-    uri: 'uiuiuiuiuiuiuiuiui',
+    uri: '/Users/yaroslav/github/lecture-player/src/assets/track.mp3',
   },
 ]
 

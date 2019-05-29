@@ -2,6 +2,7 @@ import { all } from 'redux-saga/effects'
 import { navigationSaga } from './navigation'
 import { handleErrors } from '../aspects'
 import { lecturesSaga } from './lectures'
+import { playerSaga } from './player'
 
 const handleErrorsWithOptions = saga =>
   handleErrors({
@@ -16,6 +17,7 @@ const rootSaga = function*() {
   yield all([
     handleErrorsWithOptions(navigationSaga),
     handleErrorsWithOptions(lecturesSaga),
+    handleErrorsWithOptions(playerSaga),
   ])
 }
 

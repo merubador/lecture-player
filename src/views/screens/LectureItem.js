@@ -3,6 +3,8 @@ import * as R from 'ramda'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { play } from '../../assets'
+import { playLecture } from '../../modules/player'
+import { withHandlers } from 'recompose'
 
 const Container = styled.View`
   width: 100%;
@@ -29,18 +31,25 @@ const PlayIcon = styled.Image.attrs({
   height: 44px;
 `
 
-const LectureItemDumb = ({ lecture: { name, uri } = {} }) => (
+const Button = styled.TouchableOpacity``
+
+const LectureItemDumb = ({ play, lecture: { name } = {} }) => (
   <Container>
     <Name>{name}</Name>
-    <PlayIcon />
+    <Button onPress={play}>
+      <PlayIcon />
+    </Button>
   </Container>
 )
 
 const LectureItem = R.compose(
   connect(
     null,
-    {},
+    { playLecture },
   ),
+  withHandlers({
+    play: ({ lecture, playLecture }) => () => playLecture(lecture),
+  }),
 )(LectureItemDumb)
 
 export default LectureItem

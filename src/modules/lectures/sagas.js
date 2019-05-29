@@ -9,7 +9,7 @@ const fetchLecturesSaga = function*() {
   const lectures = yield call(LecturesManager.getLectures)
 
   yield delay(1000)
-  console.log(lectures, 'lectures')
+
   yield put(fetchLecturesSuccess(lectures))
   if (!R.isEmpty(lectures)) {
     yield put(navigate(NAVIGATORS.LECTURES))
