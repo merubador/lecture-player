@@ -1,8 +1,8 @@
-import React from 'React'
+import React from 'react'
 import * as R from 'ramda'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { play } from '../../assets'
+import { playIcon } from '../../assets'
 import { playLecture } from '../../modules/player'
 import { withHandlers } from 'recompose'
 
@@ -25,10 +25,10 @@ const Name = styled.Text`
 `
 
 const PlayIcon = styled.Image.attrs({
-  source: play,
+  source: playIcon,
 })`
-  width: 44px;
-  height: 44px;
+  width: 35px;
+  height: 35px;
 `
 
 const Button = styled.TouchableOpacity``

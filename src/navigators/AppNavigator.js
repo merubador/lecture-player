@@ -1,5 +1,4 @@
-import { createSwitchNavigator } from 'react-navigation'
-import { createAppContainer } from 'react-navigation'
+import { createSwitchNavigator, createAppContainer } from 'react-navigation'
 import MainNavigator from './MainNavigator'
 import { NAVIGATORS } from '../constants'
 import { Loading } from '../views/screens'

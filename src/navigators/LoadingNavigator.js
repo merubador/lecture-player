@@ -1,15 +1,14 @@
 import { createStackNavigator } from 'react-navigation'
-import {
-  withNavigateOnboarding,
-  withNavigateSignin,
-} from '../views/components/commons'
-import { addSafeAreaViewInStackNavigator } from '../utils'
+import { NAVIGATORS } from '../constants'
+import { Lectures, Player } from '../views/screens'
 
-const AuthNavigator = createStackNavigator(
-  addSafeAreaViewInStackNavigator({
-    [withNavigateOnboarding]: Onboarding,
-    [withNavigateSignin]: SigninContainer,
-  }),
-)
+const LoadingNavigator = createStackNavigator({
+  [NAVIGATORS.LECTURES]: {
+    screen: Lectures,
+  },
+  [NAVIGATORS.PLAYER]: {
+    screen: Player,
+  },
+})
 
-export default AuthNavigator
+export default LoadingNavigator

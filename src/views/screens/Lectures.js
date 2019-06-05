@@ -1,5 +1,6 @@
-import React from 'React'
+import React from 'react'
 import * as R from 'ramda'
+import { FlatList } from 'react-native'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { getLectureList } from '../../modules/lectures'
@@ -7,23 +8,17 @@ import LectureItem from './LectureItem'
 
 const Container = styled.View`
   flex: 1;
-  align-items: center;
-  justify-content: flex-start;
+  flex-direction: column;
+  padding: 15px 0;
   background: #1f242b;
-`
-
-const Title = styled.Text`
-  margin-bottom: 25px;
-  font-size: 32px;
-  color: #f7f7f7;
 `
 
 const LecturesDumb = ({ lectures }) => (
   <Container>
-    <Title>Лекции</Title>
-    {lectures.map((lecture, index) => (
-      <LectureItem key={index} lecture={lecture} />
-    ))}
+    <FlatList
+      data={lectures}
+      renderItem={({ item }) => <LectureItem lecture={item} />}
+    />
   </Container>
 )
 
