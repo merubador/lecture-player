@@ -9,15 +9,10 @@ import { AudioService } from '../../services'
 
 const Container = styled(Slider)`
   width: 200px;
-  height: 40px;
+  margin: 0 15px;
 `
 
-const TrackLineDumb = ({
-  value,
-  onValueChange,
-  onSlidingStart,
-  onSlidingComplete,
-}) => (
+const TrackLineDumb = ({ value, onSlidingStart, onSlidingComplete }) => (
   <Container
     onSlidingStart={onSlidingStart}
     onSlidingComplete={onSlidingComplete}

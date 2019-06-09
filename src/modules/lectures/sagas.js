@@ -8,6 +8,8 @@ import { NAVIGATORS } from '../../constants'
 const fetchLecturesSaga = function*() {
   const lectures = yield call(LecturesManager.getLectures)
 
+  console.log(lectures, 'lectures')
+
   yield delay(1000)
 
   yield put(fetchLecturesSuccess(lectures))

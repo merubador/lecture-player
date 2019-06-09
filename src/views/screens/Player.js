@@ -1,5 +1,6 @@
 import React from 'react'
 import * as R from 'ramda'
+import moment from 'moment'
 import Video from 'react-native-video'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
@@ -12,8 +13,8 @@ import {
   getIsAudio,
 } from '../../modules/player'
 import { playIcon, pauseIcon, audioIcon } from '../../assets'
-import { withHandlers, withStateHandlers } from 'recompose'
-import { TrackLine } from '../components'
+import { withHandlers, withStateHandlers, withProps } from 'recompose'
+import { TrackLine, LectureInfo } from '../components'
 import { AudioService } from '../../services'
 
 const Container = styled.View`
@@ -21,11 +22,6 @@ const Container = styled.View`
   align-items: center;
   justify-content: space-between;
   background: #1f242b;
-`
-
-const Title = styled.Text`
-  font-size: 60px;
-  color: #f7f7f7;
 `
 
 const PlayIcon = styled.Image`
@@ -48,9 +44,21 @@ const AudioIcon = styled.Image.attrs({
   height: 256px;
 `
 
-const Footer = styled.View`
-  flex-direction: column;
+const PlayerControl = styled.View`
   align-items: center;
+`
+
+const TrackLineContainer = styled.View`
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+`
+
+const Time = styled.Text`
+  width: 50px;
+  align-items: center;
+  font-size: 18px;
+  color: #adadad;
 `
 
 const PlayerDumb = ({
@@ -61,10 +69,12 @@ const PlayerDumb = ({
   onProgress,
   currentTime,
   changeTime,
-  currentLecture: { name, uri, duration } = {},
+  currentLecture: { name, uri, duration, author } = {},
+  convertedCurrentTime,
+  convertedLectureDuration,
 }) => (
   <Container>
-    <Title>{name}</Title>
+    <LectureInfo name={name} author={author} />
     <VideoPlayer
       ref={AudioService.setPlayerRef}
       visible={!isAudio}
@@ -73,16 +83,20 @@ const PlayerDumb = ({
       onProgress={onProgress}
     />
     {isAudio && <AudioIcon />}
-    <Footer>
+    <PlayerControl>
       <Button onPress={playerStatus === 'playing' ? pause : resume}>
         <PlayIcon source={playerStatus === 'playing' ? pauseIcon : playIcon} />
       </Button>
-      <TrackLine
-        value={currentTime / duration}
-        changeTime={changeTime}
-        duration={duration}
-      />
-    </Footer>
+      <TrackLineContainer>
+        <Time>{convertedCurrentTime}</Time>
+        <TrackLine
+          value={currentTime / duration}
+          changeTime={changeTime}
+          duration={duration}
+        />
+        <Time>{convertedLectureDuration}</Time>
+      </TrackLineContainer>
+    </PlayerControl>
   </Container>
 )
 
@@ -111,6 +125,13 @@ const Player = R.compose(
         }
       },
     },
+  ),
+  withProps(
+    ({ currentTime, currentLecture: { duration } }) =>
+      console.log(currentTime, duration, '<===') || {
+        convertedCurrentTime: moment.unix(currentTime).format('mm:ss'),
+        convertedLectureDuration: moment.unix(duration).format('mm:ss'),
+      },
   ),
 )(PlayerDumb)
 
